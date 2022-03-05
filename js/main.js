@@ -17,8 +17,12 @@ showMenu("navToggle", "navMenu", "menuOpen", "menuClose");
 // Remove menu mobile after clicking on a link
 const navLink = document.querySelectorAll(".nav-link");
 function linkAction() {
-  const navMenu = document.getElementById("navMenu");
+  const navMenu = document.getElementById("navMenu"),
+    menuOpen = document.getElementById("menuOpen"),
+    menuClose = document.getElementById("menuClose");
   navMenu.classList.remove("show-menu");
+  menuOpen.classList.toggle("hide-menu-icon");
+  menuClose.classList.toggle("show-menu-icon");
 }
 navLink.forEach((n) => n.addEventListener("click", linkAction));
 
@@ -43,6 +47,19 @@ function scrollActive() {
 }
 window.addEventListener("scroll", scrollActive);
 
+// Remove menu mobile if clicked on canvas
+const canvas = document.querySelector(".resume");
+const hideMenu = () => {
+  const navMenu = document.querySelector(".show-menu"),
+    menuOpen = document.getElementById("menuOpen"),
+    menuClose = document.getElementById("menuClose");
+  if (navMenu) {
+    navMenu.classList.remove("show-menu");
+    menuOpen.classList.toggle("hide-menu-icon");
+    menuClose.classList.toggle("show-menu-icon");
+  }
+};
+canvas.addEventListener("click", hideMenu);
 // Show scroll top
 function scrollTop() {
   const scrollTop = document.getElementById("scrollTop");
