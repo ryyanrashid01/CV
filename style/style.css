@@ -108,6 +108,8 @@ img {
   letter-spacing: 0.35rem;
   text-align: center;
   margin-bottom: var(--mb-3);
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
 }
 
 /* Layout */
