@@ -76,7 +76,7 @@ const iconTheme = "bx-sun";
 const setTheme = () => {
   let timeHours = new Date().getHours();
   let selectedTheme, selectedIcon;
-  if (timeHours > 7 && timeHours < 19) {
+  if (timeHours > 5 && timeHours < 19) {
     selectedTheme = "light";
     selectedIcon = "bx-sun";
   } else {
