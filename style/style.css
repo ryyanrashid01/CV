@@ -339,11 +339,6 @@ img {
   margin-right: 0.25rem;
 }
 
-/* Profile */
-.profile-desc {
-  text-align: justify;
-}
-
 /* Education, Projects, Course */
 .education-content,
 .course-content {
@@ -431,10 +426,6 @@ img {
 
 .edu-ins-city {
   font-style: italic;
-}
-
-.project-desc {
-  text-align: justify;
 }
 
 /* Skills and languages*/
@@ -580,10 +571,6 @@ img {
   }
   .download-resume {
     display: inline-block;
-  }
-  .section-title,
-  .profile-desc {
-    text-align: justify;
   }
   .home-container {
     gap: 1.5rem;
