@@ -373,14 +373,16 @@ img {
 .education-data,
 .course-data,
 .project-data,
-.org-data {
+.org-data,
+.prof-exp-data {
   gap: 0.5rem;
 }
 
 .education-title,
 .project-title,
 .course-title,
-.org-title {
+.org-title,
+.skill-title {
   font-size: var(--h3-font-size);
 }
 
@@ -420,7 +422,9 @@ img {
 .education-year,
 .project-end,
 .org-desc,
-.org-details {
+.org-details,
+.prof-exp-duration-location,
+.skill-desc {
   font-size: var(--smaller-font-size);
 }
 
@@ -429,14 +433,20 @@ img {
 }
 
 /* Skills and languages*/
-.skills-content,
+.skill-data {
+  gap: 0.5rem;
+}
+
+.skill-desc {
+  padding-left: 2.5rem;
+}
+
 .interest-content,
 .language-content {
   grid-template-columns: repeat(2, 1fr);
   gap: 0;
 }
 
-.skills-name,
 .interest-name,
 .language-name {
   display: flex;
@@ -445,7 +455,6 @@ img {
   margin-bottom: var(--mb-3);
 }
 
-.skills-circle,
 .language-circle {
   display: inline-block;
   width: 5px;
