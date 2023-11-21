@@ -409,6 +409,10 @@ img {
   text-underline-offset: 0.25rem;
 }
 
+.non-clickable:hover {
+  text-decoration: none;
+}
+
 .course-by {
   font-size: var(--smaller-font-size);
   color: var(--text-color-light);
