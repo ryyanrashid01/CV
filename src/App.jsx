@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/sheet"
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect"
 
-const HeroGyroscope = lazy(() => import("@/components/hero-gyroscope"))
+const HeroPolyhedron = lazy(() => import("@/components/hero-polyhedron"))
 
 const baseUrl = import.meta.env.BASE_URL
 
@@ -102,16 +102,16 @@ const conformanceCapabilities = [
 
 const capabilities = [
   {
-    name: "Systems Engineering",
-    detail: "C++20, CMake, concurrent processing, NATS JetStream, event-driven boundaries, typed YAML",
+    name: "AI and Machine Learning",
+    detail: "PyTorch, TensorFlow, scikit-learn, computer vision, neural networks, NumPy, Pandas, LLM API integration",
   },
   {
-    name: "Backend and Web",
-    detail: "Python, FastAPI, JavaScript, TypeScript, React, Next.js, Node.js, REST APIs",
+    name: "Software Engineering",
+    detail: "C++20, CMake, Python, FastAPI, JavaScript, TypeScript, React, Next.js, Node.js, REST APIs",
   },
   {
-    name: "Data and Applied AI",
-    detail: "PostgreSQL, MongoDB, SQL, PyTorch, TensorFlow, scikit-learn, computer vision",
+    name: "Systems and Data",
+    detail: "Concurrent processing, event-driven systems, NATS JetStream, SQL, PostgreSQL, MongoDB",
   },
   {
     name: "Delivery and Operations",
@@ -177,7 +177,7 @@ function Header() {
             href="#top"
           >
             <span className="font-mono text-xl font-medium tracking-[-0.08em] text-primary">MR</span>
-            <span className="hidden text-sm text-muted-foreground sm:inline">Software engineer</span>
+            <span className="hidden text-sm text-muted-foreground sm:inline">AI/ML engineer</span>
           </a>
 
           <div className="flex items-center gap-1">
@@ -208,7 +208,7 @@ function Header() {
               <SheetContent className="w-full sm:max-w-sm" side="right">
                 <SheetHeader className="border-b px-6 py-6">
                   <SheetTitle>Mohammad Ryyan Rashid</SheetTitle>
-                  <SheetDescription>AI and software engineer</SheetDescription>
+                  <SheetDescription>AI/ML engineer and software engineer</SheetDescription>
                 </SheetHeader>
                 <nav aria-label="Mobile navigation" className="grid px-6 py-6">
                   {navigation.map((item) => (
@@ -244,11 +244,11 @@ function Hero() {
           </h1>
           <motion.p
             animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            className="mt-7 max-w-[26ch] font-mono text-lg leading-snug text-primary sm:text-xl"
+            className="mt-7 max-w-md font-mono text-lg leading-snug text-primary sm:text-xl"
             initial={reduceMotion ? undefined : { opacity: 0, y: 12 }}
             transition={{ delay: 0.28, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            AI and software engineer.
+            AI/ML engineer. Software engineer.
           </motion.p>
           <motion.p
             animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
@@ -289,16 +289,16 @@ function Hero() {
             <Suspense
               fallback={
                 <img
-                  alt="Mechanical systems gyroscope with three machined rings and a faceted central core"
+                  alt="Wireframe polyhedron with a horizontal chartreuse scanning plane"
                   className="h-full w-full object-contain"
                   fetchPriority="high"
-                  height="1025"
-                  src={`${baseUrl}assets/hero-gyroscope-transparent.webp`}
-                  width="1535"
+                  height="1024"
+                  src={`${baseUrl}assets/hero-polyhedron-transparent.webp`}
+                  width="1536"
                 />
               }
             >
-              <HeroGyroscope fallbackSrc={`${baseUrl}assets/hero-gyroscope-transparent.webp`} />
+              <HeroPolyhedron fallbackSrc={`${baseUrl}assets/hero-polyhedron-transparent.webp`} />
             </Suspense>
           </div>
         </div>
@@ -309,8 +309,8 @@ function Hero() {
 
 function Highlights() {
   const items = [
-    { label: "Focus", value: "AI, systems, and production software" },
-    { label: "Production", value: "4,600+ financial transactions" },
+    { label: "Focus", value: "AI/ML, intelligent systems, and production software" },
+    { label: "Engineering", value: "C++ systems to full-stack products" },
     { label: "Research", value: "IEEE / ICUAS 2026" },
   ]
 
@@ -716,7 +716,7 @@ function Contact() {
 
         <motion.div className="flex flex-col justify-center p-6 py-20 sm:p-10 lg:p-16" {...reveal}>
           <p className="font-mono text-xs text-primary">Capabilities</p>
-          <Accordion className="mt-5" collapsible defaultValue="systems" type="single">
+          <Accordion className="mt-5" collapsible defaultValue="ai" type="single">
             {capabilities.map((capability) => (
               <AccordionItem key={capability.name} value={capability.name.toLowerCase().split(" ")[0]}>
                 <AccordionTrigger className="py-6 text-xl font-medium tracking-[-0.035em] hover:no-underline sm:text-2xl">
@@ -741,7 +741,7 @@ function Contact() {
           <IconMapPin aria-hidden="true" className="size-4" stroke={1.75} />
           Abu Dhabi, UAE
         </p>
-        <p>AI and software engineering</p>
+        <p>AI/ML and software engineering</p>
       </footer>
     </section>
   )
