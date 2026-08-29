@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { lazy, Suspense, useEffect, useState } from "react"
 import {
   IconArrowRight,
   IconArrowUpRight,
@@ -20,8 +20,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
-import { CometCard } from "@/components/ui/comet-card"
-import { DitherShader } from "@/components/ui/dither-shader"
 import {
   Sheet,
   SheetClose,
@@ -32,6 +30,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect"
+
+const HeroGyroscope = lazy(() => import("@/components/hero-gyroscope"))
 
 const baseUrl = import.meta.env.BASE_URL
 
@@ -284,47 +284,24 @@ function Hero() {
           </motion.div>
         </div>
 
-        <motion.div
-          animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
-          className="min-w-0 lg:col-span-7"
-          initial={reduceMotion ? undefined : { opacity: 0, scale: 0.975 }}
-          transition={{ delay: 0.18, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <CometCard
-            disabled={reduceMotion}
-            hoverScale={1.006}
-            rotateDepth={2.5}
-            translateDepth={3}
-          >
-            <div className="media-frame relative aspect-[8/5] overflow-hidden rounded-xl border bg-[#111312]">
-              <DitherShader
-                alt="Abstract computational sculpture combining solid, wireframe, and perforated forms"
-                animated={!reduceMotion}
-                animationDuration={4800}
-                animationFps={10}
-                animationSpeed={0.09}
-                brightness={-0.02}
-                canvasOpacity={0.24}
-                className="hidden md:block"
-                contrast={1.04}
-                fetchPriority="high"
-                gridSize={3}
-                height={900}
-                src={`${baseUrl}assets/hero-computational-sculpture.webp`}
-                threshold={0.7}
-                width={1440}
-              />
-              <img
-                alt="Abstract computational sculpture combining solid, wireframe, and perforated forms"
-                className="h-full w-full object-cover md:hidden"
-                fetchPriority="high"
-                height="900"
-                src={`${baseUrl}assets/hero-computational-sculpture.webp`}
-                width="1440"
-              />
-            </div>
-          </CometCard>
-        </motion.div>
+        <div className="min-w-0 lg:col-span-7">
+          <div className="relative aspect-[8/5] overflow-visible lg:aspect-[6/5]">
+            <Suspense
+              fallback={
+                <img
+                  alt="Mechanical systems gyroscope with three machined rings and a faceted central core"
+                  className="h-full w-full object-contain"
+                  fetchPriority="high"
+                  height="1025"
+                  src={`${baseUrl}assets/hero-gyroscope-transparent.webp`}
+                  width="1535"
+                />
+              }
+            >
+              <HeroGyroscope fallbackSrc={`${baseUrl}assets/hero-gyroscope-transparent.webp`} />
+            </Suspense>
+          </div>
+        </div>
       </div>
     </section>
   )
