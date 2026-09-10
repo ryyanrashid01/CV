@@ -1,0 +1,130 @@
+.circuit-backdrop {
+  --circuit-ink: #5c79a2;
+  --circuit-node: #4c6687;
+  --circuit-active: #2868d5;
+  --circuit-warm: #b35b1b;
+  position: absolute;
+  inset: 0;
+  z-index: auto;
+  pointer-events: none;
+}
+.dark .circuit-backdrop {
+  --circuit-ink: #7898c8;
+  --circuit-node: #a0b5c9;
+  --circuit-active: #84cbff;
+  --circuit-warm: #ffb375;
+}
+.section-circuit {
+  --circuit-progress: 0;
+  position: absolute;
+  z-index: 2;
+  overflow: visible;
+  color: var(--circuit-ink);
+  opacity: clamp(0, calc(var(--circuit-progress) * 5), 1);
+}
+.circuit-route {
+  --route-delay: 0;
+  stroke: currentColor;
+  stroke-width: 0.9;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - clamp(0, (var(--circuit-progress) - var(--route-delay)) * 1.35, 1));
+  opacity: 0.36;
+}
+.circuit-registration {
+  stroke: currentColor;
+  stroke-width: 0.6;
+  opacity: 0.13;
+}
+.circuit-pad {
+  --pad-delay: 0.2;
+  stroke: var(--circuit-node);
+  stroke-width: 0.9;
+  opacity: clamp(0, calc((var(--circuit-progress) - var(--pad-delay)) * 4), 0.6);
+  fill: var(--background);
+}
+.circuit-pad-center,
+.circuit-junction {
+  fill: var(--circuit-node);
+  stroke: none;
+}
+.circuit-junction {
+  opacity: calc(var(--circuit-progress) * 0.45);
+}
+.circuit-arrow {
+  stroke: var(--circuit-node);
+  stroke-width: 1;
+  opacity: calc(var(--circuit-progress) * 0.6);
+}
+.circuit-live-route {
+  stroke: var(--circuit-active);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 0.015 1;
+  stroke-dashoffset: calc(-1 * var(--circuit-progress));
+  opacity: 0.85;
+}
+.section-circuit[data-state="settled"] .circuit-live-route,
+.circuit-compact {
+  display: none;
+}
+.section-circuit[data-compact="true"] .circuit-full { display: none; }
+.section-circuit[data-compact="true"] .circuit-compact { display: block; }
+.section-circuit[data-compact="true"] .circuit-route { stroke-width: 2; opacity: 0.43; }
+.section-circuit[data-compact="true"] .circuit-pad { stroke-width: 2; }
+.section-circuit[data-compact="true"] .circuit-live-route { stroke-width: 3; }
+
+.section-circuit-hero {
+  z-index: 0;
+  mask-image: linear-gradient(180deg, transparent 6%, black 20%, black 78%, transparent 100%);
+}
+.hero-circuit-trace {
+  stroke: var(--circuit-ink);
+  stroke-width: 0.85;
+  stroke-linejoin: round;
+  opacity: 0.23;
+}
+.hero-circuit-pad {
+  stroke: var(--circuit-ink);
+  stroke-width: 0.85;
+  fill: var(--background);
+  opacity: 0.4;
+}
+.circuit-current {
+  color: var(--circuit-active);
+  opacity: 0;
+}
+.circuit-current[data-tone="warm"] { color: var(--circuit-warm); }
+.circuit-current path {
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-dasharray: 0.002 0.998;
+  animation: circuit-current-travel var(--current-duration, 11s) linear infinite;
+  animation-delay: var(--current-delay, -1.4s);
+  animation-play-state: paused;
+}
+.circuit-current-halo { stroke-width: 7; opacity: 0.13; }
+.circuit-current-dot { stroke-width: 2; opacity: 0.95; }
+.section-circuit[data-state="settled"][data-visible="true"] .circuit-current { opacity: 1; }
+.circuit-backdrop[data-motion="running"] .section-circuit-hero[data-state="settled"][data-visible="true"] .circuit-current path,
+.circuit-backdrop[data-motion="running"] .section-circuit[data-state="settled"][data-visible="true"][data-compact="false"] .circuit-full .circuit-current path,
+.circuit-backdrop[data-motion="running"] .section-circuit[data-state="settled"][data-visible="true"][data-compact="true"] .circuit-compact .circuit-current path { animation-play-state: running; }
+.section-circuit:not(.section-circuit-hero) .circuit-current-halo { stroke-width: 6; }
+.section-circuit[data-compact="true"] .circuit-compact .circuit-current-dot { stroke-width: 4; }
+.section-circuit[data-compact="true"] .circuit-compact .circuit-current-halo { stroke-width: 11; }
+.section-circuit-hero[data-compact="true"] [data-hero-route="3"] .circuit-current { display: none; }
+.section-circuit-hero[data-compact="true"] [data-hero-route="3"] .circuit-current path { animation: none; }
+@keyframes circuit-current-travel {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .circuit-live-route,
+  .circuit-current { display: none; }
+  .circuit-current path { animation: none; }
+}
+@media print {
+  .circuit-backdrop { display: none; }
+  .circuit-current path { animation: none; }
+}
