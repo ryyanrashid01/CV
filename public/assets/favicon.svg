@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MR">
-  <rect width="64" height="64" rx="10" fill="#080910"/>
-  <text x="32" y="39" fill="#edf0f7" font-family="Arial, sans-serif" font-size="26" font-weight="600" letter-spacing="-2" text-anchor="middle">MR</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="1000" height="1000" fill="#1d0f2b"/><path transform="translate(120 120)" fill="#fde725" d="M0 0H250V78H78V250H0ZM760 0V250H682V78H510V0ZM0 760V510H78V682H250V760ZM760 760H510V682H682V510H760Z"/><path fill="#f1eee6" d="M256.5 706.3V293.7H599.9Q645 293.7 674.5 312.3Q704 330.8 718.8 361.0Q733.6 391.2 733.6 427.0Q733.6 466.2 715 498.3Q696.5 530.4 659.1 549.0L743.5 706.3H605.7L537.2 569.0H378.7V706.3ZM378.7 478.8H560.0Q582 478.8 595.2 465.5Q608.4 452.3 608.4 430.4Q608.4 415.6 602.4 405.3Q596.5 394.9 585.7 389.6Q575 384.3 560 384.3H378.7Z"/></svg>

@@ -1,84 +1,66 @@
-# Spatial tiles for an AI and software portfolio
+# Bounding Box: design notes
 
-The visual direction restores the earlier CNN-style image planes. Eight large planes sit at different depths, with small detached tiles, sparse connecting curves, and floating image patches. Native scrolling moves the camera through the layers and separates or assembles their tiles. Pointer movement adds perspective; the scene settles when input stops.
+The portfolio's brand comes from computer vision. Work is framed and labelled the way a detection model labels a frame: a box, a class name and a confidence score. One shape, the corner bracket, does the work of logo, image frame, hover state, focus ring, active navigation and cursor.
 
-The positioning is AI and software engineering across domains. The planes show three representations of one abstract geometric field: shaded faceted forms, fine contours, and sparse activation-like patches. These are coordinated visual treatments, not outputs claimed from a trained model. Keep the hero, shared scene, fallback and social preview free of industry-specific imagery such as drones or microscopy. Actual project screenshots and the factual materials-research entry stay in the Work and Research content.
+## Identity
 
-## Content and navigation
+- **Logo.** “MR” in Archivo at 125% width and weight 800, inside four corner brackets. `src/components/logo.jsx` holds the outlined paths, so the mark renders the same before fonts load. `public/assets/favicon.svg` drops to “R” so it stays legible at 16px; `apple-touch-icon.png` is rendered from it.
+- **Type.** Archivo Expanded (125% width, 700) for display, Archivo at normal width for reading, Martian Mono at 87.5% width for labels, tags and numbers. Fonts are self-hosted through Fontsource, latin subset only.
+- **Shape.** Radius 0 everywhere. Brackets mark state instead of rounded corners or shadows. The `.brk` utility in `src/index.css` draws them with backgrounds; `--bc`, `--arm` and `--t` set colour, arm length and thickness.
+- **Colour.** Viridis, matplotlib's default colormap. Deep purple ink, highlighter yellow, teal and green. Tag colours encode discipline: yellow for AI, teal for software, green for research (`discipline` in `src/data/portfolio.js`).
 
-Facts come from `public/assets/Mohammad_Ryyan_Rashid_Resume.pdf` and the existing website, normalized in `src/data/portfolio.js`. Preserve organizations, role dates, metrics, project links, degree details, and the hydrogel manuscript's “under peer review” status. IntelliBin and its World Future Energy Summit 2026 presentation come from the PDF. UAS conformance belongs to Khalifa University according to the PDF. Do not invent dates or issuers for unspecified awards.
-
-The page runs from introduction to work, experience, research and education, capabilities, and contact. Stable project IDs connect cards, experience entries, and capabilities. Summaries support scanning; dialogs and native disclosures carry detail. Keep the downloadable PDF easy to find.
-
-## Motion and composition
-
-- The existing shared opening sequence completes over 1500ms. Header navigation and the CV download remain available. The tiles assemble while readable pieces of the introduction appear.
-- Native scrolling advances content generation monotonically. Project images resolve in irregular patches with small corner lights. Completed content stays readable when scrolling back.
-- A separate measured chapter-progress value drives the restored perspective camera. Filtering projects or resizing remeasures chapter bounds, so the scene continues to follow the content.
-- Desktop places the image planes beside the introduction. Mobile restores the original content-first composition: the identity, headline and actions sit above the tile scene. Neutral veils keep art clear of the copy and controls.
-- Faint circuit traces wrap through the hero's measured empty space, above and below its copy and along the outer margins. Three small currents travel continuously on desktop; mobile uses two and keeps the larger routes below the actions. Their movement is independent of scroll. Blue signals carry a small warm accent on one desktop route.
-- Later sections use stronger reading veils over the moving planes. Quiet, unlabelled circuit traces and directed graphs occupy heading whitespace; narrow layouts use compact connectors. Each visible, completed circuit carries two currents, or one on mobile. Hero traces sit below the text layer; later circuits sit above the reading veils in measured whitespace. Floating code and programming-language logos remain removed.
-
-This is visual artwork, not a labelled lesson about network architecture. Preserve the original tile structure and physical camera depth. Do not replace it with spheres, filament webs, or a game.
-
-## Visual system
-
-Keep Geist Variable and Geist Mono, the wide editorial layout, staggered project grid, and restrained corner radii. Main containers cap at 1440px with 64px desktop gutters, 45px intermediate gutters, and 24px mobile gutters. Section spacing steps through 115/90/72px.
-
-| Token | Dark | Light |
+| Token | Light | Dark |
 | --- | --- | --- |
-| Background | `#080910` | `#f3f4f8` |
-| Foreground | `#f3f4ff` | `#1b1c29` |
-| Muted | `#a4a7b8` | `#55596d` |
-| Button fill | `#edf0f7` | `#242734` |
-| Button ink | `#151720` | `#ffffff` |
-| Accent | `#82b9ff` | `#2454c6` |
-| Hero emphasis | `#9bbcf7` | `#3156a3` |
-| Hero action | `#2454ed` / white | `#2454ed` / white |
-| Surface | `#141620` | `#e9eaf2` |
-| Border | `#2c3042` | `#cbd0df` |
+| `--bg` | `#f1f1ec` | `#110c17` |
+| `--fg` | `#1d0f2b` | `#f1eee6` |
+| `--muted` | `#5f5868` | `#a49caf` |
+| `--line` | `#d8d4dc` | `#2b2335` |
+| `--mark` (brackets) | `#1d0f2b` | `#fde725` |
+| `--btn-bg` / `--btn-fg` | `#1d0f2b` / `#f1f1ec` | `#fde725` / `#1d0f2b` |
+| `--tag-ai` / `--tag-software` / `--tag-research` | `#fde725` / `#8eddc9` / `#bfe38a` | same |
 
-Headlines use solid foreground and muted emphasis, with steel blue reserved for the hero's “engineered” span. The hero action uses solid blue with a white label and a darker hover fill (`#1d46c7`); other primary actions and filters retain their existing fills. Keep labels whole and focus outlines visible. Reserve gradients for artwork shading, reading veils and the circuit's quiet edge fade; do not apply gradient text or rainbow controls. Tile edges and connecting lines use restrained blue, silver and lavender accents. Tiny warm circuit signals add contrast without becoming another text color. Light mode retains defined image surfaces rather than washing them into pale transparent panels.
+Muted text is 6.0:1 on light and 7.3:1 on dark. Tags always use ink text. The Research section uses `.invert`, which swaps to the other theme's tokens for a colour shift mid-page. The marquee is the one loud yellow band.
 
-The layout has been checked at 320 × 740, 390 × 844, 768 × 600, 1366 × 600 and 1440 × 900. Preserve clearance around the fixed header, actions, and discipline controls.
+The type scale lives in `--t-*` tokens (12px labels up to the fluid hero and contact sizes). Nothing renders below 11px.
 
-## Accessibility and rendering
+## Hero: the detector
 
-All CV content remains semantic HTML. The canvas, circuit SVGs, generation paths and decorative fragments are hidden from assistive technology and cannot intercept clicks. Preserve keyboard focus, meaningful image alternatives, pressed states, current-section navigation, dialog focus trapping and restoration, and the skip link.
+`src/lib/detector-scene.js` is a Three.js scene, lazy-loaded by `src/components/detector-scene.jsx`.
 
-Pause and reduced motion immediately reveal content. Pause freezes camera travel; reduced motion fixes the camera at its initial depth. Dialogs pause the scene. Focus, anchors, browser Find and restored scroll positions reveal their destinations. Print hides decorative layers and presents readable content. Native scrolling is never intercepted.
+- Project screenshots sit on cards in a receding 3D deck (`heroProjectIds`). The deck follows the pointer and tips back as the hero scrolls away.
+- Four reticles, each made of eight solid bars, fly in from space. For every box in a project's `detections`, a reticle first lands on a decoy region with a low guess (“text 0.27”), then moves near the real region (“headline 0.62”) and snaps onto it with a small overshoot (“headline 0.99”). A scan band sweeps the card while it searches.
+- Labels are HTML positioned each frame at the reticle's projected corner. Registration crosses drift in the background; reticles leave short trails.
+- After every box locks, the front card swings around to the back and the next project comes forward. Clicking a back card brings it forward; clicking the front card opens the case study.
+- The readout under the hero is plain HTML: project, discipline, outcome, previous, next, pause and case study. Hovering or focusing it holds the rotation.
 
-Ambient currents use normalized SVG paths with small round dashes and a faint halo. CSS animates their stroke offset over 8–16 seconds, with staggered phases; there is no JavaScript animation loop or per-frame layout measurement. Current starts after its circuit finishes revealing. IntersectionObserver pauses offscreen circuits, and document visibility pauses the layer in hidden tabs. The main pause control and project dialogs also pause current. Reduced motion hides moving lights while keeping traces; print removes the decoration and resets the hero accents to neutral colors. Inactive desktop/mobile drawings remain paused.
+Detection boxes are percentages of a 16:10 image: `{ label, score, x, y, w, h }`. The same data drives the 2D overlays in Work cards (on hover), the Research image (on scroll into view) and the project dialog (always shown).
 
-The restored WebGL renderer batches 936 desktop tiles or 432 mobile tiles, connecting lines, and 220 desktop or 84 mobile floating patches into three draw calls. Rendering is driven by opening, scroll, pointer, mode and layout changes. It stops once transitions settle and while the document is hidden. Slow devices reduce pixel ratio. Geometry, textures, observers and event listeners are disposed on unmount.
+The deck is fitted to the `.hero-stage` element, so the layout decides where it sits. Phones use a tighter stack that never climbs into the copy. Rendering stops when the hero is offscreen, the tab is hidden, a dialog is open or rotation is paused. Slow frames drop the pixel ratio to 1. WebGL failure shows the front project as a flat image with HTML boxes.
 
-The source imagery is generated once as a small numerical DataTexture: 512 × 768 on desktop and 256 × 384 on mobile. Two channels encode precise depth; two hold derivatives. The shader reads this shared field to produce all three treatments, with antialiased contours and deterministic sparse features. There are no photographic texture downloads or asynchronous texture-load callbacks. The field is disposed with the rest of the scene.
+## Motion
 
-Initialization failure or WebGL context loss reveals a static capture of the implemented tile scene. Separate desktop/mobile and light/dark WebP assets preserve the same subject and composition. All four captures and the social preview use the current geometric imagery. The semantic content and controls remain independent of WebGL. Image-generation fragments mount only near the viewport; their underlying semantic images remain available.
+- Lenis smooth scrolling with eased anchor jumps. It stops while dialogs or the mobile menu are open; dialog content sets `data-lenis-prevent`.
+- One intro per session: the mark locks on, then the page wipes up.
+- Section headings slide up line by line. Work columns drift at different speeds; the experience timeline fills as you read.
+- The cursor bracket follows the pointer and snaps around whatever it points at, with a label from `data-cursor`. Fine pointers only.
+- Buttons roll their label on hover; primary actions pull toward the pointer. Work cards tilt with a soft glare.
+- The contact heading thins near the pointer using Archivo's weight axis. The footer shows Abu Dhabi time.
+- The theme toggle wipes the new theme out of the button in a square.
 
-## Implementation map
+Reduced motion turns off Lenis, the intro, the cursor, tilt, magnetism, the marquee drift and the proximity type. The hero renders one still frame with every box locked.
 
-- `src/App.jsx`: page composition, controls, shared hooks, dialogs and contact.
-- `src/data/portfolio.js`: factual content and project relationships.
-- `src/lib/use-page-generation.js`: opening sequence and persistent content frontier.
-- `src/lib/use-spatial-progress.js`: measured section progress for the perspective camera.
-- `src/components/neural-network.jsx`: restored image-plane renderer, shading, lifecycle and responsive fallback.
-- `src/lib/neural-topology.js`: original tile geometry, curves, floating patches and generation anchor.
-- `src/lib/computational-field.js`: shared geometric depth field and numerical texture, generated once per scene.
-- `src/components/content-assembly.jsx` and `.css`: readable text pieces and image fragments.
-- `src/components/generation-field.jsx` and `.css`: source connection, margin paths and active tips.
-- `src/components/circuit-backdrop.jsx` and `.css`: measured hero routes, section circuits, compact connectors and visibility-controlled ambient currents.
-- `src/components/research-section.jsx` and `.css`: computer-vision-led research.
-- `src/index.css`: typography, themes, responsive composition, reading veils and print.
-- `public/assets/spatial-fallback*.webp`: captures of the current scene for rendering failures.
-- `public/assets/neural-core-preview.webp`: screenshot of the current implemented hero for social previews.
+## Accessibility
 
-## Validation
+All content is semantic HTML; the canvas and decorative layers are `aria-hidden`. Keyboard users get visible focus outlines, the skip link, Radix dialogs with focus return, pressed states on filters and controls, and a pause control for the rotating hero. The theme follows the system until the visitor chooses, and `index.html` applies it before first paint. Print hides the scene, header and decorations.
 
-ESLint and production build pass. Independent browser checks cover both themes at 320, 390, 768 and 1366px widths, plus a 1440px desktop review: no horizontal overflow, visible actions and discipline controls, and readable text.
+## Map
 
-Camera depth responds to scrolling, freezes on pause, resumes correctly, and remains at 11.00 with reduced motion. Idle frame counts settle. Direct research anchors and resizing remain aligned. Forced context loss loads the correct desktop/mobile fallback in both themes. No shader or page errors were observed in the final implementation. Project-domain imagery has been removed from the live source and all of its static captures. The shared field takes approximately 7–12ms to generate on compact settings and 30–36ms on desktop settings in the review browser; it is generated once, with no texture animation loop.
-
-Project dialogs pause the scene and restore focus after Escape. Filters return 3 AI/research projects, 5 software/systems projects and 6 overall. The CV PDF returns HTTP 200. Print hides the scene. The lazy Three.js chunk remains above Vite's standard 500KB advisory; this is a build-size warning, not a build failure. Earlier filament-scene Lighthouse measurements do not describe this restored implementation.
-
-The ambient-circuit pass was checked at 1440 × 900, 1366 × 600, 390 × 844 and 320 × 740 in both themes. Stationary circuit offsets advance while the 3D frame counter stays fixed. Pause and project dialogs freeze offsets; offscreen circuits pause, inactive mobile/desktop drawings stay paused, and reduced motion and print remove the current animation. A synthetic visibility event verified hidden-document suspension; headless browser tabs did not provide a real background-tab test. Hero button contrast is 5.89:1, rising to 7.63:1 on hover; the emphasized word has 10.34:1 contrast in dark mode and 6.39:1 in light mode. Labels, keyboard outlines, and layout clearance remain intact.
+- `src/App.jsx`: shell, theme, smooth scroll, section counter, dialog state.
+- `src/data/portfolio.js`: content, disciplines, detection boxes, hero order.
+- `src/components/hero.jsx`, `hero.css`: copy, readout and scene host.
+- `src/lib/detector-scene.js`, `src/components/detector-scene.jsx`: the 3D detector.
+- `src/components/detection-frame.jsx`: image with HTML detection boxes.
+- `src/components/motion-kit.jsx`: reveals, headings, buttons, tilt, marquee, cursor, intro.
+- `src/components/*-section.jsx`, `sections.css`: Work, Experience, Research, Capabilities, Contact and footer.
+- `src/components/site-header.jsx`, `project-dialog.jsx`, `logo.jsx`.
+- `src/index.css`: fonts, tokens, base styles and shared components.

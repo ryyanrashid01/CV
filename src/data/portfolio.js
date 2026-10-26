@@ -29,6 +29,13 @@ export const projects = [
     title: "ACT Operations Platform",
     category: "Production systems",
     organization: "Aamina Charitable Trust",
+    discipline: "software",
+    detections: [
+      { label: "headline", score: "0.99", x: 6.9, y: 21.1, w: 40.3, h: 31.7 },
+      { label: "illustration", score: "0.96", x: 59.9, y: 25.8, w: 30.7, h: 48.1 },
+      { label: "cta.donate", score: "0.98", x: 81.4, y: 2.4, w: 11.3, h: 5.8 },
+      { label: "impact_metrics", score: "0.97", x: 7.8, y: 89.6, w: 84.4, h: 10 },
+    ],
     description:
       "A financial-operations platform connecting beneficiary accounts, donations, payments, approvals, and reconciliation, with a public accountability site.",
     outcome:
@@ -55,6 +62,13 @@ export const projects = [
     title: "PRISM",
     category: "Autonomous systems",
     organization: "Khalifa University",
+    discipline: "research",
+    detections: [
+      { label: "monitoring_zone", score: "0.98", x: 52.2, y: 32.4, w: 24.6, h: 39.6 },
+      { label: "processing_time", score: "0.95", x: 1.3, y: 17, w: 24.2, h: 36.1 },
+      { label: "track", score: "0.97", x: 73.3, y: 42, w: 3.3, h: 4.4 },
+      { label: "track", score: "0.96", x: 62.2, y: 68.7, w: 2.8, h: 3.8 },
+    ],
     description:
       "A UTM research simulator for configuring missions, evaluating risk, and inspecting live timing and airspace-conformance signals.",
     outcome:
@@ -76,6 +90,13 @@ export const projects = [
     title: "UAS Conformance Monitoring",
     category: "Autonomous systems",
     organization: "Khalifa University",
+    discipline: "research",
+    detections: [
+      { label: "restricted_volume", score: "0.97", x: 54, y: 23.4, w: 29.2, h: 35.4 },
+      { label: "violation", score: "0.98", x: 70.3, y: 41.6, w: 4.2, h: 3.6 },
+      { label: "uav", score: "0.99", x: 39.3, y: 52.9, w: 6.1, h: 3.9 },
+      { label: "uav", score: "0.99", x: 4, y: 77.5, w: 11.1, h: 8 },
+    ],
     description:
       "A modular C++20 decision engine that correlates aircraft evidence and evaluates identity, authorization, trajectories, and 3D airspace constraints in real time.",
     outcome:
@@ -100,12 +121,20 @@ export const projects = [
     title: "Taqyeem",
     category: "Production systems",
     organization: "Khalifa University",
+    discipline: "software",
+    detections: [
+      { label: "headline", score: "0.99", x: 10.4, y: 28.3, w: 31.6, h: 19.7 },
+      { label: "review_card", score: "0.98", x: 48.5, y: 32.4, w: 40.9, h: 34.4 },
+      { label: "flag.unsatisfied", score: "0.96", x: 81.4, y: 52, w: 7.4, h: 3.3 },
+      { label: "cta", score: "0.97", x: 10.6, y: 64.6, w: 10.6, h: 4.9 },
+    ],
     description:
       "An outcome-based education platform connecting course assessment, CLO-PLO analysis, student feedback, and administrative approvals.",
     outcome: "Connected assessment and quality-assurance workflows.",
     tech: ["Next.js", "TypeScript", "PostgreSQL"],
     image: "assets/portfolio/taqyeem-platform.webp",
-    imageAlt: "Taqyeem assessment and academic reporting platform",
+    imageAlt:
+      "Taqyeem website: CLO and PLO evidence without the spreadsheets, beside a course review checklist",
     links: [{ label: "Visit Taqyeem", href: "https://taqyeem.app" }],
     details: [
       "Lead development of a full-stack platform for outcome-based education and academic quality assurance at Khalifa University.",
@@ -118,10 +147,20 @@ export const projects = [
     title: "IntelliBin",
     category: "Machine intelligence",
     organization: "Khalifa University",
+    discipline: "ai",
+    detections: [
+      { label: "input_frame", score: "0.99", x: 5, y: 35.6, w: 22.9, h: 36.7 },
+      { label: "backbone_a", score: "0.97", x: 37.6, y: 32.2, w: 19, h: 16.7 },
+      { label: "backbone_b", score: "0.96", x: 37.6, y: 61.1, w: 19, h: 16.7 },
+      { label: "output.4cls", score: "0.98", x: 78.6, y: 41.1, w: 16.4, h: 28.9 },
+    ],
     description:
       "An AI-driven waste-segregation system pairing a dual-backbone classification model with a functional prototype.",
     outcome: "Four-category waste classification. Presented at WFES 2026.",
     tech: ["Computer Vision", "Machine Learning", "Dual-backbone Model"],
+    image: "assets/portfolio/intellibin-diagram.webp",
+    imageAlt:
+      "Concept diagram: a pixelated input frame feeds two model backbones that combine to score four waste categories",
     links: [],
     details: [
       "Developed a dual-backbone model and functional prototype for four-category waste classification at Khalifa University in 2026.",
@@ -134,6 +173,13 @@ export const projects = [
     title: "Wordle Solver",
     category: "Algorithms and interaction",
     organization: "Personal project",
+    discipline: "software",
+    detections: [
+      { label: "board", score: "0.99", x: 23.1, y: 27.4, w: 22.8, h: 43.9 },
+      { label: "best_guess", score: "0.98", x: 62.9, y: 10.8, w: 29.9, h: 13.2 },
+      { label: "ranked_list", score: "0.97", x: 64.6, y: 50.6, w: 26.5, h: 24.6 },
+      { label: "keyboard", score: "0.99", x: 15.8, y: 80.9, w: 37.4, h: 16 },
+    ],
     description:
       "A browser-based solver that ranks an 8,888-word corpus by information gain, frequency, and commonness while keeping the interface responsive.",
     outcome: "8,888 words ranked without blocking the interface.",
@@ -157,6 +203,12 @@ export const projects = [
     relatedSkills: ["Software Engineering", "Systems and Data"],
   },
 ];
+
+// Tag colours and names follow these three disciplines.
+export const disciplineNames = { ai: "AI", software: "Software", research: "Research" };
+
+// Order of the 3D project cards in the hero.
+export const heroProjectIds = ["act", "prism", "intellibin", "taqyeem", "wordle"];
 
 export const experience = [
   {

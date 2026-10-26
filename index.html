@@ -1,39 +1,50 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#080910" />
+    <meta name="theme-color" content="#f1f1ec" />
+    <script>
+      // Set the theme before first paint: a saved choice, otherwise the system's.
+      (function () {
+        var theme;
+        try {
+          theme = localStorage.getItem("theme");
+        } catch (error) {
+          theme = null;
+        }
+        if (theme !== "light" && theme !== "dark") {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = theme;
+        document
+          .querySelector('meta[name="theme-color"]')
+          .setAttribute("content", theme === "dark" ? "#110c17" : "#f1f1ec");
+      })();
+    </script>
     <meta
       name="description"
-      content="Mohammad Ryyan Rashid is an AI/ML engineer and software engineer building intelligent systems, production software, and applied research tools."
+      content="Mohammad Ryyan Rashid is an AI/ML engineer and software engineer building computer vision, machine learning and production systems."
     />
     <meta
       name="keywords"
-      content="Mohammad Ryyan Rashid, AI/ML engineer, software engineer, PyTorch, computer vision, C++20, FastAPI, intelligent systems"
+      content="Mohammad Ryyan Rashid, AI/ML engineer, software engineer, computer vision, PyTorch, C++20, FastAPI, Khalifa University"
     />
-    <meta
-      property="og:title"
-      content="Mohammad Ryyan Rashid | AI/ML Engineer &amp; Software Engineer"
-    />
+    <meta property="og:title" content="Mohammad Ryyan Rashid | AI/ML Engineer &amp; Software Engineer" />
     <meta
       property="og:description"
-      content="AI/ML, software engineering, intelligent systems, and applied research."
+      content="Computer vision, machine learning and production software, shown the way a vision model sees it."
     />
     <meta property="og:type" content="website" />
-    <meta
-      property="og:image"
-      content="https://ryyanrashid01.github.io/CV/assets/neural-core-preview.webp"
-    />
+    <meta property="og:image" content="https://ryyanrashid01.github.io/CV/assets/social-preview.jpg" />
     <meta
       property="og:image:alt"
-      content="Layered 3D geometric textures, contours and feature patterns beside Mohammad Ryyan Rashid's AI and software engineering portfolio"
+      content="Mohammad Ryyan Rashid's portfolio: the headline Intelligence, engineered for reality beside 3D project cards with detection boxes"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
-    <title>
-      Mohammad Ryyan Rashid | AI/ML Engineer &amp; Software Engineer
-    </title>
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+    <title>Mohammad Ryyan Rashid | AI/ML Engineer &amp; Software Engineer</title>
   </head>
   <body>
     <div id="root"></div>

@@ -1,0 +1,217 @@
+.hero {
+  position: relative;
+  min-height: max(680px, 100svh);
+  display: grid;
+  overflow: clip;
+}
+.hero-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  column-gap: 24px;
+  row-gap: 24px;
+  padding-top: calc(var(--header) + 32px);
+  padding-bottom: 24px;
+  /* Leave the canvas clickable around the copy. */
+  pointer-events: none;
+}
+.hero-copy {
+  grid-area: 1 / 1;
+  align-self: center;
+  display: grid;
+  justify-items: start;
+  gap: 26px;
+  padding-block: 24px;
+  pointer-events: auto;
+}
+.hero-title {
+  font-size: var(--t-hero);
+  line-height: 1;
+}
+.hero-title .line {
+  padding-bottom: 0.06em;
+}
+.hero-title .hero-mark-line {
+  overflow: visible;
+}
+.hero-mark {
+  position: relative;
+  display: inline-block;
+}
+.hero-mark-box {
+  --arm: 0.2em;
+  --t: max(2px, 0.032em);
+  position: absolute;
+  inset: 0.02em -0.11em -0.02em;
+}
+.hero-mark-tag {
+  position: absolute;
+  left: calc(100% + 0.2em);
+  top: 0.06em;
+  padding: 0.4em 0.55em;
+  background: var(--tag-ai);
+  color: var(--tag-ink);
+  font: 500 max(11px, 0.15em) / 1 var(--font-mono);
+  font-stretch: 87.5%;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.hero-lede {
+  max-width: 34ch;
+  font-size: var(--t-lg);
+  line-height: 1.5;
+  color: var(--muted);
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: 500 var(--t-xs) / 1.4 var(--font-mono);
+  font-stretch: 87.5%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero-pulse {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  background: var(--green);
+}
+.hero-pulse::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 1px solid var(--green);
+  animation: pulse 2.2s var(--ease) infinite;
+}
+@keyframes pulse {
+  from {
+    opacity: 1;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+.hero-stage {
+  position: relative;
+  grid-area: 1 / 2;
+  min-height: 360px;
+}
+.hero-fallback {
+  position: absolute;
+  inset: 12% 2% 12% 6%;
+  aspect-ratio: auto;
+  box-shadow: 0 30px 80px rgba(17, 12, 23, 0.25);
+  pointer-events: auto;
+}
+.hero-readout {
+  grid-area: 2 / 1 / 3 / 3;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  pointer-events: auto;
+}
+.hero-index {
+  font: 500 var(--t-xs) / 1 var(--font-mono);
+  font-stretch: 87.5%;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.hero-index b {
+  --arm: 6px;
+  --t: 1.5px;
+  padding: 5px 7px;
+  font-weight: 500;
+  color: var(--fg);
+}
+.hero-now {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.hero-now strong {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 650;
+  font-stretch: 112%;
+}
+.hero-outcome {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: var(--t-sm);
+}
+.hero-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero-controls .btn {
+  margin-left: 8px;
+}
+
+@media (max-width: 1023px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(300px, 1fr) auto;
+    row-gap: 8px;
+  }
+  .hero-copy {
+    grid-area: 1 / 1;
+    align-self: start;
+    padding-top: 12px;
+  }
+  .hero-stage {
+    grid-area: 2 / 1;
+    min-height: clamp(280px, 62vw, 520px);
+  }
+  .hero-readout {
+    grid-area: 3 / 1;
+    grid-template-columns: auto minmax(0, 1fr);
+    row-gap: 14px;
+  }
+  .hero-controls {
+    grid-column: 1 / -1;
+  }
+  .hero-controls .btn {
+    margin-left: auto;
+  }
+}
+@media (max-width: 559px) {
+  .hero-copy {
+    gap: 20px;
+  }
+  .hero-outcome {
+    display: none;
+  }
+  .hero-now {
+    gap: 10px;
+  }
+  .hero-status {
+    font-size: 11px;
+  }
+}

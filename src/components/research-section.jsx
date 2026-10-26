@@ -1,183 +1,130 @@
-import { IconArrowDown, IconArrowUpRight } from "@tabler/icons-react";
-import {
-  Assemble as Reveal,
-  AssembleImage,
-} from "@/components/content-assembly";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { IconArrowUpRight, IconPlus } from "@tabler/icons-react";
 import { education, projects, research } from "@/data/portfolio";
-import "./research-section.css";
+import { DetectionFrame } from "@/components/detection-frame";
+import { Reveal, SectionRule, SplitHeading } from "@/components/motion-kit";
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
+const find = (id) => projects.find((item) => item.id === id);
 
 export default function Research({ openProject }) {
   const hydrogel = research.find((item) => item.id === "hydrogels");
   const remote = research.find((item) => item.id === "remote-id");
-  const conformance = projects.find((item) => item.id === "conformance");
-
+  const conformance = find("conformance");
+  const feature = useRef(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: feature, offset: ["start end", "end start"] });
+  const drift = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
   return (
-    <section
-      className="section section-anchor research-section"
-      id="research"
-      aria-labelledby="research-title"
-    >
+    <section className="section research invert" id="research" aria-labelledby="research-title">
       <div className="container">
-        <div className="section-heading">
-          <Reveal>
-            <p className="eyebrow">Research & exploration</p>
-          </Reveal>
-          <Reveal>
-            <h2 id="research-title">
-              Research,
-              <br />
-              <span className="muted-heading">made tangible.</span>
-            </h2>
-          </Reveal>
-          <Reveal className="research-introduction">
-            <p>Exploring what intelligence can do in the physical world.</p>
-          </Reveal>
+        <SectionRule index="03" label="Research & exploration" note="IEEE ICUAS 2026 · WFES 2026" />
+        <div className="section-head">
+          <SplitHeading id="research-title" lines={["Research,", "made tangible."]} muted={1} />
+          <p>Exploring what intelligence can do in the physical world.</p>
         </div>
         <div className="research-layout">
-          <div className="research-feature">
-            <Reveal className="research-feature-image">
-              <AssembleImage
-                src={asset(conformance.image)}
-                alt={conformance.imageAlt}
-                width="1536"
-                height="961"
-                className="research-lead-image"
-              />
+          <article className="research-feature">
+            <Reveal className="research-media" ref={feature}>
+              <motion.div className="research-media-inner" style={reduce ? undefined : { y: drift }}>
+                <DetectionFrame project={conformance} mode="inview" />
+              </motion.div>
             </Reveal>
-            <Reveal>
+            <Reveal className="research-copy">
               <p className="eyebrow">{remote.venue}</p>
-            </Reveal>
-            <Reveal>
-              <h3>Visual verification of UAV location.</h3>
-            </Reveal>
-            <Reveal className="research-description">
+              <h3 className="display research-title">Visual verification of UAV location.</h3>
               <p>{remote.description}</p>
-            </Reveal>
-            <Reveal>
               <p className="paper-title">{remote.title}</p>
-            </Reveal>
-            <Reveal>
               <button
+                type="button"
                 className="text-link"
-                onClick={(event) =>
-                  openProject(conformance, event.currentTarget)
-                }
+                onClick={(event) => openProject(conformance, event.currentTarget)}
+                data-cursor="open 0.99"
               >
                 Explore the connected system
-                <IconArrowUpRight />
+                <IconArrowUpRight aria-hidden="true" />
               </button>
             </Reveal>
-          </div>
-          <Reveal className="research-articles">
-            <Reveal className="research-article">
-              <Reveal>
-                <p className="eyebrow">World Future Energy Summit 2026</p>
-              </Reveal>
-              <Reveal>
-                <h3>
-                  Intelligence that
-                  <br />
-                  meets the real world.
-                </h3>
-              </Reveal>
-              <Reveal className="research-description">
-                <p>
-                  A dual-backbone vision model and a working prototype for
-                  four-category waste classification.
-                </p>
-              </Reveal>
-              <Reveal>
-                <button
-                  className="text-link"
-                  onClick={(event) =>
-                    openProject(
-                      projects.find((item) => item.id === "intellibin"),
-                      event.currentTarget,
-                    )
-                  }
-                >
-                  Meet IntelliBin
-                  <IconArrowUpRight />
-                </button>
-              </Reveal>
+          </article>
+          <div className="research-articles">
+            <Reveal as="article" className="research-article">
+              <p className="eyebrow">World Future Energy Summit 2026</p>
+              <h3 className="display">Intelligence that meets the real world.</h3>
+              <p>A dual-backbone vision model and a working prototype for four-category waste classification.</p>
+              <button
+                type="button"
+                className="text-link"
+                onClick={(event) => openProject(find("intellibin"), event.currentTarget)}
+                data-cursor="open 0.99"
+              >
+                Meet IntelliBin
+                <IconArrowUpRight aria-hidden="true" />
+              </button>
             </Reveal>
-            <Reveal className="research-article research-materials">
-              <Reveal>
-                <p className="eyebrow">{hydrogel.venue}</p>
-              </Reveal>
-              <Reveal>
-                <h3>Learning from complex materials.</h3>
-              </Reveal>
-              <div className="research-materials-body">
-                <Reveal className="research-thumbnail">
-                  <AssembleImage
-                    src={asset(hydrogel.image)}
-                    alt={hydrogel.imageAlt}
-                    width="1536"
-                    height="864"
-                  />
-                </Reveal>
-                <Reveal className="research-description">
-                  <p>{hydrogel.description}</p>
-                </Reveal>
+            <Reveal as="article" className="research-article">
+              <p className="eyebrow">{hydrogel.venue}</p>
+              <h3 className="display">Learning from complex materials.</h3>
+              <div className="research-materials">
+                <img
+                  src={asset(hydrogel.image)}
+                  alt={hydrogel.imageAlt}
+                  width="1536"
+                  height="864"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <p>{hydrogel.description}</p>
               </div>
-              <Reveal>
-                <details className="research-details">
-                  <summary>
-                    Read the research title
-                    <IconArrowDown />
-                  </summary>
-                  <p>{hydrogel.title}</p>
-                </details>
-              </Reveal>
-              <Reveal>
-                <span className="research-status">{hydrogel.status}</span>
-              </Reveal>
+              <details className="entry-details">
+                <summary>
+                  Research title
+                  <IconPlus aria-hidden="true" />
+                </summary>
+                <p>{hydrogel.title}</p>
+              </details>
+              <p className="research-status">{hydrogel.status}</p>
             </Reveal>
-            <Reveal className="presentation-note">
-              <span>Also presented at</span>
+            <Reveal className="research-note">
+              <span className="eyebrow">Also presented at</span>
               <p>UMEX & SimTEX 2026</p>
               <button
-                onClick={(event) =>
-                  openProject(
-                    projects.find((item) => item.id === "prism"),
-                    event.currentTarget,
-                  )
-                }
+                type="button"
+                className="text-link"
+                onClick={(event) => openProject(find("prism"), event.currentTarget)}
+                data-cursor="open 0.99"
               >
                 PRISM research simulator
-                <IconArrowUpRight />
+                <IconArrowUpRight aria-hidden="true" />
               </button>
             </Reveal>
-          </Reveal>
+          </div>
         </div>
-        <Reveal className="education-row">
+        <Reveal className="education">
           <div>
             <p className="eyebrow">The foundation</p>
-            <h3>{education.institution}</h3>
-            <span>{education.dates}</span>
+            <h3 className="display">{education.institution}</h3>
+            <p className="education-dates">{education.dates}</p>
           </div>
-          <div>
+          <div className="education-detail">
             <h4>{education.degree}</h4>
             <p>
-              {education.specialization} / Minor in {education.minor}
+              {education.specialization} · Minor in {education.minor}
             </p>
             <p className="education-result">
-              CGPA {education.cgpa}
-              <span>Dean’s Award List, four semesters</span>
+              <span className="tag">CGPA {education.cgpa}</span>
+              <span className="tag">Dean’s Award List, four semesters</span>
             </p>
           </div>
-        </Reveal>
-        <Reveal className="education-extra">
-          <div>
-            <span>Recognition</span>
-            <p>Intern Excellence Award / Gold Award</p>
-          </div>
-          <div>
-            <span>Languages</span>
-            <p>{education.languages.join(" / ")}</p>
+          <div className="education-extra">
+            <div>
+              <p className="eyebrow">Recognition</p>
+              <p>Intern Excellence Award · Gold Award</p>
+            </div>
+            <div>
+              <p className="eyebrow">Languages</p>
+              <p>{education.languages.join(" · ")}</p>
+            </div>
           </div>
         </Reveal>
       </div>
