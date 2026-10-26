@@ -98,10 +98,10 @@ export const projects = [
       { label: "uav", score: "0.99", x: 4, y: 77.5, w: 11.1, h: 8 },
     ],
     description:
-      "A modular C++20 decision engine that correlates aircraft evidence and evaluates identity, authorization, trajectories, and 3D airspace constraints in real time.",
+      "A modular C++ decision engine that correlates aircraft evidence and evaluates identity, authorization, trajectories, and 3D airspace constraints in real time.",
     outcome:
       "Verified evidence translated into deterministic operational states.",
-    tech: ["C++20", "CMake", "NATS JetStream", "Remote ID", "YAML", "vcpkg"],
+    tech: ["C++", "CMake", "NATS JetStream", "Remote ID", "YAML", "vcpkg"],
     image: "assets/uas-conformance.webp",
     imageAlt:
       "Aircraft trajectories through three-dimensional airspace corridors and exclusion zones",
@@ -221,7 +221,7 @@ export const experience = [
     ],
     points: [
       "Develop PRISM, a FastAPI-based UTM simulator with configurable risk models, interactive analysis, and sequential or parallel execution for TII-sponsored research deliverables.",
-      "Architect and develop modular C++20 systems for UAS evidence correlation, identity and authorization checks, trajectory analysis, and 3D airspace conformance.",
+      "Architect and develop modular C++ systems for UAS evidence correlation, identity and authorization checks, trajectory analysis, and 3D airspace conformance.",
       "Lead Taqyeem, a full-stack platform for outcome-based education, CLO-PLO mapping, and interactive academic quality-assurance workflows.",
     ],
     projectIds: ["prism", "conformance", "taqyeem", "intellibin"],
@@ -342,7 +342,7 @@ export const capabilities = [
     name: "Software Engineering",
     summary: "Real-time C++ systems, Python services, and full-stack products.",
     skills: [
-      "C++20",
+      "C++",
       "CMake",
       "Python",
       "FastAPI",

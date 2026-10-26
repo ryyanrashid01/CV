@@ -23,7 +23,7 @@ const sections = [
   { id: "contact", label: "Contact" },
 ];
 const sectionIds = sections.map((section) => section.id);
-const marqueeItems = ["Computer vision", "Machine learning", "Production systems", "C++20 · Python · TypeScript", "Research"];
+const marqueeItems = ["Computer vision", "Machine learning", "Production systems", "C++ · Python · TypeScript", "Research"];
 const pad = (value) => String(value).padStart(2, "0");
 
 // The hero waits for the intro on a first visit and starts at once afterwards.
