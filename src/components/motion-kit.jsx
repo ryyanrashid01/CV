@@ -236,6 +236,9 @@ export function BracketCursor() {
         y.set(box.top - pad);
         width.set(box.width + pad * 2);
         height.set(box.height + pad * 2);
+        // Keep the label on screen: below targets near the top, right-aligned near the right edge.
+        node.dataset.below = String(box.top < 48);
+        node.dataset.end = String(box.left + 160 > window.innerWidth);
       } else {
         x.set(pointer.x - 11);
         y.set(pointer.y - 11);
@@ -243,27 +246,47 @@ export function BracketCursor() {
         height.set(22);
       }
     };
-    const move = (event) => {
-      pointer = { x: event.clientX, y: event.clientY };
-      const target = event.target instanceof Element ? event.target.closest(targets) : null;
+    const lockOnto = (element) => {
+      const target = element instanceof Element ? element.closest(targets) : null;
       const next = target && !target.closest("[data-cursor-ignore]") ? target : null;
       if (next !== locked) {
         locked = next;
         node.dataset.locked = String(!!locked);
         node.querySelector(".cursor-tag").textContent = locked?.dataset.cursor || "";
       }
+    };
+    const move = (event) => {
+      pointer = { x: event.clientX, y: event.clientY };
+      lockOnto(event.target);
       node.dataset.visible = "true";
       place();
+    };
+    // A click can open a dialog or move content under a still pointer, so look again.
+    let recheck = 0;
+    const click = () => {
+      clearTimeout(recheck);
+      recheck = setTimeout(() => {
+        lockOnto(document.elementFromPoint(pointer.x, pointer.y));
+        place();
+      }, 120);
     };
     const hide = () => {
       node.dataset.visible = "false";
     };
     window.addEventListener("pointermove", move, { passive: true });
-    window.addEventListener("scroll", place, { passive: true });
+    // Content scrolls under a still pointer, so re-target on scroll too.
+    const scrolled = () => {
+      lockOnto(document.elementFromPoint(pointer.x, pointer.y));
+      place();
+    };
+    window.addEventListener("scroll", scrolled, { passive: true });
+    window.addEventListener("click", click, true);
     document.documentElement.addEventListener("pointerleave", hide);
     return () => {
+      clearTimeout(recheck);
       window.removeEventListener("pointermove", move);
-      window.removeEventListener("scroll", place);
+      window.removeEventListener("scroll", scrolled);
+      window.removeEventListener("click", click, true);
       document.documentElement.removeEventListener("pointerleave", hide);
     };
   }, [enabled, x, y, width, height]);

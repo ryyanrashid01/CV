@@ -303,12 +303,6 @@
   display: grid;
   gap: 32px;
 }
-.research-media {
-  overflow: hidden;
-}
-.research-media-inner {
-  scale: 1.12;
-}
 .research-copy {
   display: grid;
   gap: 16px;
@@ -348,17 +342,8 @@
 .research-article > p:not(.eyebrow) {
   color: var(--muted);
 }
-.research-materials {
-  display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
-  gap: 16px;
-  align-items: start;
-  color: var(--muted);
-}
-.research-materials img {
-  width: 112px;
-  height: 112px;
-  object-fit: cover;
+.research-figure {
+  width: 100%;
 }
 .research-status {
   font: 500 var(--t-xs) / 1.4 var(--font-mono);

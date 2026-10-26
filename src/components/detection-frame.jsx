@@ -42,7 +42,7 @@ export function DetectionFrame({ project, mode = "hover", className = "", eager 
         {project.detections?.map((box, index) => (
           <span
             key={`${box.label}-${index}`}
-            className={`det-box brk ${box.y < 7 ? "is-low" : ""}`}
+            className={`det-box brk ${box.y < 7 ? "is-low" : ""} ${box.x > 62 ? "is-end" : ""}`}
             style={{
               left: `${box.x}%`,
               top: `${box.y}%`,

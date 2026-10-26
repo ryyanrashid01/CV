@@ -92,19 +92,19 @@ export const projects = [
     organization: "Khalifa University",
     discipline: "research",
     detections: [
-      { label: "restricted_volume", score: "0.97", x: 54, y: 23.4, w: 29.2, h: 35.4 },
-      { label: "violation", score: "0.98", x: 70.3, y: 41.6, w: 4.2, h: 3.6 },
-      { label: "uav", score: "0.99", x: 39.3, y: 52.9, w: 6.1, h: 3.9 },
-      { label: "uav", score: "0.99", x: 4, y: 77.5, w: 11.1, h: 8 },
+      { label: "remote_id", score: "0.98", x: 5, y: 40.2, w: 20.8, h: 6.1 },
+      { label: "correlator", score: "0.97", x: 5, y: 57.8, w: 22.2, h: 23.3 },
+      { label: "exclusion_zone", score: "0.96", x: 53.6, y: 64.4, w: 13.9, h: 17.8 },
+      { label: "spatial_violation", score: "0.99", x: 76.4, y: 57.9, w: 18.6, h: 4.9 },
     ],
     description:
       "A modular C++ decision engine that correlates aircraft evidence and evaluates identity, authorization, trajectories, and 3D airspace constraints in real time.",
     outcome:
       "Verified evidence translated into deterministic operational states.",
     tech: ["C++", "CMake", "NATS JetStream", "Remote ID", "YAML", "vcpkg"],
-    image: "assets/uas-conformance.webp",
+    image: "assets/portfolio/conformance-diagram.webp",
     imageAlt:
-      "Aircraft trajectories through three-dimensional airspace corridors and exclusion zones",
+      "Concept diagram: tracking and Remote ID evidence are correlated, checked against a waypoint corridor and an exclusion zone, and mapped to operational states such as spatial violation",
     links: [],
     details: [
       "Architect and develop the real-time UAS conformance-monitoring system at Khalifa University, integrating research outputs through independently testable CMake modules and event-driven boundaries.",
@@ -208,7 +208,7 @@ export const projects = [
 export const disciplineNames = { ai: "AI", software: "Software", research: "Research" };
 
 // Order of the 3D project cards in the hero.
-export const heroProjectIds = ["act", "prism", "intellibin", "taqyeem", "wordle"];
+export const heroProjectIds = ["act", "prism", "intellibin", "conformance", "taqyeem", "wordle"];
 
 export const experience = [
   {
@@ -278,9 +278,16 @@ export const research = [
     status: "Manuscript under peer review.",
     description:
       "Machine learning, image processing, and genetic algorithms applied to hydrogel porosity, pore-size distribution, and mechanical properties.",
-    image: "assets/hydrogel-microstructure.webp",
+    image: "assets/portfolio/hydrogel-diagram.webp",
     imageAlt:
-      "Microscopy-inspired illustration of an interconnected porous hydrogel structure",
+      "Concept diagram: a porous structure is segmented into pores, measured as a pore-size distribution and porosity, and fed to SVR, XGBR, MLR and neural-network models",
+    discipline: "research",
+    detections: [
+      { label: "segmentation", score: "0.97", x: 23.2, y: 28, w: 18.1, h: 57.8 },
+      { label: "size_distribution", score: "0.96", x: 46.9, y: 32.2, w: 18.8, h: 22.2 },
+      { label: "porosity", score: "0.98", x: 46.9, y: 61.6, w: 18.8, h: 5 },
+      { label: "model", score: "0.99", x: 72.2, y: 53.7, w: 18.8, h: 4.9 },
+    ],
     projectIds: [],
     links: [],
   },

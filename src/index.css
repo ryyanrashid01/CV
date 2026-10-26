@@ -27,6 +27,7 @@
   --raised: #fbfbf8;
   --mark: #1d0f2b;
   --hl: #fde725;
+  --hl-line: #f2d30b;
   --teal: #127068;
   --green: #36731f;
   --tag-ai: #fde725;
@@ -66,6 +67,7 @@
     --green: #9ad54f;
     --btn-bg: #fde725;
     --btn-fg: #1d0f2b;
+    --hl-line: #fde725;
     --grid-mark: rgba(241, 238, 230, 0.07);
     color-scheme: dark;
   }
@@ -83,6 +85,7 @@
   --green: #9ad54f;
   --btn-bg: #fde725;
   --btn-fg: #1d0f2b;
+  --hl-line: #fde725;
   --grid-mark: rgba(241, 238, 230, 0.07);
   color-scheme: dark;
 }
@@ -98,6 +101,7 @@
   --green: #36731f;
   --btn-bg: #1d0f2b;
   --btn-fg: #f1f1ec;
+  --hl-line: #f2d30b;
   --grid-mark: rgba(29, 15, 43, 0.11);
   color-scheme: light;
 }
@@ -283,10 +287,15 @@ svg.tabler-icon {
 .line > span {
   display: block;
 }
+/* A thick highlighter rule under the line, never through the letters. */
 mark {
-  background: linear-gradient(transparent 58%, var(--hl) 58%, var(--hl) 92%, transparent 92%);
+  background: none;
   color: inherit;
-  padding-inline: 0.08em;
+  text-decoration-line: underline;
+  text-decoration-color: var(--hl-line);
+  text-decoration-thickness: 0.28em;
+  text-underline-offset: 0.16em;
+  text-decoration-skip-ink: auto;
 }
 
 /* Buttons roll their label on hover. */
@@ -622,6 +631,14 @@ mark {
   opacity: 1;
   transform: none;
 }
+.cursor[data-below="true"] .cursor-tag {
+  bottom: auto;
+  top: calc(100% + 3px);
+}
+.cursor[data-end="true"] .cursor-tag {
+  left: auto;
+  right: -1px;
+}
 .cursor-dot {
   position: absolute;
   left: 50%;
@@ -791,6 +808,10 @@ mark {
   bottom: auto;
   top: 100%;
 }
+.det-box.is-end .det-tag {
+  left: auto;
+  right: -1px;
+}
 .det-frame[data-mode="static"] .det-box,
 .det-frame[data-active="true"] .det-box,
 .project-open:hover .det-box,
@@ -934,6 +955,12 @@ mark {
   .btn {
     min-height: 48px;
     padding: 0 18px;
+  }
+}
+@media (max-width: 559px) {
+  /* Small images keep every box but only two labels, so tags never pile up. */
+  .det-box:nth-child(n + 3) .det-tag {
+    display: none;
   }
 }
 @media (pointer: coarse) {

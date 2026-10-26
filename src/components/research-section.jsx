@@ -1,21 +1,14 @@
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { IconArrowUpRight, IconPlus } from "@tabler/icons-react";
 import { education, projects, research } from "@/data/portfolio";
 import { DetectionFrame } from "@/components/detection-frame";
-import { Reveal, SectionRule, SplitHeading } from "@/components/motion-kit";
+import { Reveal, SectionRule, SplitHeading, Tilt } from "@/components/motion-kit";
 
-const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 const find = (id) => projects.find((item) => item.id === id);
 
 export default function Research({ openProject }) {
   const hydrogel = research.find((item) => item.id === "hydrogels");
   const remote = research.find((item) => item.id === "remote-id");
   const conformance = find("conformance");
-  const feature = useRef(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: feature, offset: ["start end", "end start"] });
-  const drift = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
   return (
     <section className="section research invert" id="research" aria-labelledby="research-title">
       <div className="container">
@@ -26,10 +19,10 @@ export default function Research({ openProject }) {
         </div>
         <div className="research-layout">
           <article className="research-feature">
-            <Reveal className="research-media" ref={feature}>
-              <motion.div className="research-media-inner" style={reduce ? undefined : { y: drift }}>
+            <Reveal>
+              <Tilt max={4}>
                 <DetectionFrame project={conformance} mode="inview" />
-              </motion.div>
+              </Tilt>
             </Reveal>
             <Reveal className="research-copy">
               <p className="eyebrow">{remote.venue}</p>
@@ -65,17 +58,8 @@ export default function Research({ openProject }) {
             <Reveal as="article" className="research-article">
               <p className="eyebrow">{hydrogel.venue}</p>
               <h3 className="display">Learning from complex materials.</h3>
-              <div className="research-materials">
-                <img
-                  src={asset(hydrogel.image)}
-                  alt={hydrogel.imageAlt}
-                  width="1536"
-                  height="864"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <p>{hydrogel.description}</p>
-              </div>
+              <DetectionFrame project={hydrogel} mode="inview" className="research-figure" />
+              <p>{hydrogel.description}</p>
               <details className="entry-details">
                 <summary>
                   Research title
